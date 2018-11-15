@@ -10,14 +10,14 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-success">
                 <div class="box-container-start">
-                    <div class="box-img-text" style="height:60px;display:none">
+                    <div class="box-img-text" style="height:60px">
                         <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
-                        <div class="box-mensagem-start back-grad" style="height: 56px">
+                        <div class="box-mensagem-start" style="height: 56px">
                                 
                                 <p class="msg-start" >Olá {{ Auth::user()->name}}.</p>  
                         </div>
                     </div>
-                    <div class="box-img-text" style="display:none">
+                    <div class="box-img-text">
                         <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
                         <div class="box-mensagem-start">
                             
@@ -28,7 +28,7 @@
                         </div>
 
                     </div>
-                    <div class="box-img-text" style="display:none">
+                    <div class="box-img-text">
                         <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
                         <div class="box-mensagem-start">
                             <p class="msg-start">Meu nome é <b>Gifty</b>, e estou muito feliz por você estar aqui!</p>  
@@ -37,7 +37,7 @@
                     </div>
 
 
-                    <div class="box-img-text" style="display:none">
+                    <div class="box-img-text">
                         <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
                         <div class="box-mensagem-start">
                             <p class="msg-start">Meu objetivo é tornar sua experiência incrível.
@@ -45,7 +45,7 @@
                          </div>
                     </div>
 
-                    <div class="box-img-text" style="display:none">
+                    <div class="box-img-text">
                         <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
                         <div class="box-mensagem-start">
                             <p class="msg-start">Clique em <b>Avançar</b>, para ir a próxima etapa. </p>  
@@ -80,9 +80,9 @@
             
 
         });
-        
+
         $('.box-img-text').each(function(index){
-            $(this).hide().delay(2000 * index).slideDown("fast");
+            $(this).hide().delay(3000 * index).slideDown("fast");
         });
     })
 </script>

@@ -80,6 +80,13 @@ padding-right: 10px;
     
 }
 
+.box-button{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom:18px;
+    
+}
 .img-box-mensagem-start{
     margin-right: 20px;
     border-radius: 43px;
@@ -114,5 +121,29 @@ color:white !important;
 text-decoration:none !important;
 cursor:pointer;
 }
+
+.button-avancar-red{
+    height: 45px;
+    color: white;
+    /*background: #9a0505;*/
+    border-top-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    font-size: 19px;
+    width: 119px;
+    text-align: center;
+    line-height: 44px;
+    margin-top: 4%;
+    box-shadow: 0px 0px 7px -2px rgba(0,0,0,1);
+    text-decoration: none;
+    background: linear-gradient(135deg, #9a0505 0%,#ffb000 100%);
+
+}
+
+.back-grad{
+    background: linear-gradient(135deg, #9a0505 0%,#ffb000 100%);
+    color: white;
+}
+
+
 
 /* FIM START*/

@@ -50,7 +50,7 @@ class LojasTableSeeder extends Seeder
             ],
         ];
         foreach($lojas as $loja){
-            Lojas::create($loja);
+            //Lojas::create($loja);
         }
     }
 

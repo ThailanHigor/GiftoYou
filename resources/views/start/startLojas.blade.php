@@ -9,30 +9,48 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-success">
-                <div class="panel-heading">Para uma melhor experiência, selecione algumas lojas que você curte.</div>
-
-                    @if(Auth::check())
-                    {!! Form::open(['route' => 'start.finish']) !!}
-                    <div class="box-container">
-                    
-                        @foreach($lojas as $loja)
-                                <div class="box-card">
-                                
-                                        <img src="/images/{{ $loja['Imagem_Thumb'] }}" alt="img" class="box-img">
-                                        <input type="checkbox" name="lojas[]" class="check-lojas" value="{{$loja['Slug'] }}">
-                                        <div class="box-title">{{ $loja['Nome']  }}</div>
-                                
-                                </div>
-
-                        @endforeach
+                @if( $categoria != null)
+                <div class="box-img-text">
+                    <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
+                    <div class="box-mensagem-start">
+                            <p class="msg-start">Percebi que você gosta de <b>{{ $categoria['Nome']}}</b>!<br>
+                                Que legal, eu também gosto!
+                            </p>  
                     </div>
-                    <button type="submit">Terminar</button>
-                    {!! Form::close() !!}
-                    @endif
+                </div>
+                @endif
+                <div class="box-img-text">
+                    <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
+                    <div class="box-mensagem-start">
+                            <p class="msg-start">Baseado em seu gosto, aqui estão algumas lojas que 
+                               possuem produtos com seu estilo!<br>
+                               Gosta de alguma?
+                            </p>  
+                    </div>
+
+                </div>
+
+
+                {!! Form::open(['route' => 'lojas.store', 'id' =>'lojasform']) !!}
+                <div class="box-container">
+                
+                    @foreach($lojas as $loja)
+                            <div class="box-card" style="display:none">
+                        
+                                <img src="/images/{{ $loja['Imagem_Thumb'] }}" alt="img" class="box-img">
+                                <input type="checkbox" name="lojas[]" class="check-lojas" value="{{$loja['Id'] }}">
+                                <div class="box-title">{{ $loja['Nome']  }}</div>
+                        
+                            </div>
+
+                    @endforeach
+                </div>
+                <div class="box-button" style="justify-content:center;display:none">
+                    <a class="button-avancar" href="javascript:void(0)">Avançar</a>
+                </div>
+                {!! Form::close() !!}
+              
             </div>
-            @if(Auth::guest())
-              <a href="/login" class="btn btn-info"> You need to login to see the list 😜😜 >></a>
-            @endif
         </div>
     </div>
 </div>
@@ -53,7 +71,25 @@
             }
             
 
-        })
+        });
+
+        $('.button-avancar').click(function(){
+            $("#lojasform").submit();
+        });
+        $('.box-img-text').each(function(index){
+            $(this).hide().delay(1500 * index).slideDown(500);
+        });
+
+         setTimeout(function(){
+            $('.box-card').each(function(index){
+                $(this).hide().delay(500 * index).fadeIn(400);
+                console.log(index);
+                setTimeout(function(){
+                    $('.box-button').fadeIn();
+                },2200);
+               
+            });    
+        },3000)
     })
 </script>
 
