@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 <style>
-
+#map {
+        height: 60%;
+      }
 </style>
 
 @section('content')
@@ -9,83 +11,63 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-success">
-                <div class="box-container-start">
-                    <div class="box-img-text" style="height:60px">
-                        <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
-                        <div class="box-mensagem-start" style="height: 56px">
-                                
-                                <p class="msg-start" >Olá {{ Auth::user()->name}}.</p>  
-                        </div>
-                    </div>
-                    <div class="box-img-text">
-                        <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
-                        <div class="box-mensagem-start">
-                            
-                                <p class="msg-start">Seja muito bem vindo ao <b>GiftoYou!</b><br>
-                                    Aqui você poderá compartilhar e descobrir os <b>presentes ideais</b>
-                                    para seus melhores amigos!
-                                </p>  
-                        </div>
-
-                    </div>
-                    <div class="box-img-text">
-                        <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
-                        <div class="box-mensagem-start">
-                            <p class="msg-start">Meu nome é <b>Gifty</b>, e estou muito feliz por você estar aqui!</p>  
-                        </div>
-
-                    </div>
-
-
-                    <div class="box-img-text">
-                        <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
-                        <div class="box-mensagem-start">
-                            <p class="msg-start">Meu objetivo é tornar sua experiência incrível.
-                                Então, vamos começar... </p>   
-                         </div>
-                    </div>
-
-                    <div class="box-img-text">
-                        <img src="images/icons/psyduck.svg" alt="" class="img-box-mensagem-start">
-                        <div class="box-mensagem-start">
-                            <p class="msg-start">Clique em <b>Avançar</b>, para ir a próxima etapa. </p>  
-                            
-                        </div>
-                    </div>
-                    <div class="box-img-text" style="justify-content:center">
-                        <a class=" button-avancar" href="/startcategorias">Avançar</a>
-                    </div>
+                <div>
+                    <p style="text-align:center;">Pontuação por lojas</p>
                 </div>
 
-
+                <div id="map"></div>
             </div>
         </div>
     </div>
 </div>
 
 
-<script>  
-    $(document).ready(function(){
-        $(".box-card").click(function(){
-            input = $(this).find(".check-lojas");
-
-            if(input.prop("checked")){
-                input.attr("checked",false);
-                $(this).removeClass("box-active");
-                
-            }else{
-                input.attr("checked",true);
-                $(this).addClass("box-active");
-            }
-            
-
-        });
-
-        $('.box-img-text').each(function(index){
-            $(this).hide().delay(3000 * index).slideDown("fast");
-        });
-    })
-</script>
-
 @endsection
 
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBknbwOY-E2Sz437ywIu0UyNuo5UO_78Oo&callback=initMap"
+async defer></script>
+<script>  
+
+        var map;
+        function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 15
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+                };
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('Você.');
+                infoWindow.open(map);
+                map.setCenter(pos);
+            }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+            } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+            }
+        
+        }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+
+
+    
+</script>

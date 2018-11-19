@@ -10,8 +10,9 @@
     <title>GiftoYou</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ asset('js/app.js') }}" ></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -20,13 +21,20 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
+            <div class="container" style="width: 100%">
+                <a class="navbar-brand" href="{{ url('/feed') }}">
+                    feed
+                </a>
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    GiftoYou
+                    icone
+                </a>
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    icone
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -71,6 +79,8 @@
                         @endguest
                     </ul>
                 </div>
+
+                
             </div>
         </nav>
 

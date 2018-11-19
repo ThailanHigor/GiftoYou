@@ -35,3 +35,5 @@ Route::get('/', 'HomeController@index')->middleware('auth');
 
 Route::get('/index', 'IndexController@index')->middleware('auth');
 
+Route::get('/feed', 'IndexController@feed')->name('feed')->middleware('auth');
+

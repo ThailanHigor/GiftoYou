@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="box-img-text" style="justify-content:center">
-                        <a class="button-avancar-red" href="javascript:void(0)">Começar</a>
+                        <a class="button-avancar-red" href="/feed">Começar</a>
                     </div>
                 </div>
             </div>
