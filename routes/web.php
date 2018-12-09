@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/');
@@ -33,7 +22,23 @@ Route::get('/home', 'HomeController@index')->middleware('auth');
 
 Route::get('/', 'HomeController@index')->middleware('auth');
 
-Route::get('/index', 'IndexController@index')->middleware('auth');
-
 Route::get('/feed', 'IndexController@feed')->name('feed')->middleware('auth');
 
+Route::get('/adicionarAmigo', 'IndexController@feed')->name('adicionaramigo')->middleware('auth');
+
+Route::get('/amigos', 'AmigosController@index')->name('amigos')->middleware('auth');
+
+Route::get('/novo-post', 'PostController@newPost')->name('novopost')->middleware('auth');
+Route::post('/novo-post', 'PostController@createPost')->name('createpost');
+
+Route::post('/meus-amigos', 'AmigosController@meusAmigos')->name('meusamigos')->middleware('auth');
+Route::post('/novo-amigo', 'AmigosController@novoAmigo')->name('novoamigo')->middleware('auth');
+Route::post('/add-amigo', 'AmigosController@addAmigo')->name('addamigo')->middleware('auth');
+
+Route::post('/feed/likePost', 'IndexController@likePost')->name('like')->middleware('auth');
+
+Route::get('/foto-perfil', 'StartController@addFoto')->name('addfotoperfil');
+Route::get('/map', 'MapController@index')->name('maps')->middleware('auth');
+Route::post('/save-avatar', 'StartController@saveAvatar')->name('selectavatar');
+
+Route::get('/meu-perfil', 'PerfilController@meuPerfil')->name('meu-perfil')->middleware('auth');

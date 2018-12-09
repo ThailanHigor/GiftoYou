@@ -3,8 +3,11 @@
 <style>
 .box-feed{
     width: 100%;
-    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.15);
+    /*box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.15);*/
     padding: 7px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.29);
 }
 
 .box-image-feed{
@@ -21,7 +24,7 @@
 }
 
 .box-feed-post{
-    display: flex;
+
     flex-direction: column;
 }
 
@@ -91,80 +94,88 @@ a{
     color: white;
     
 }
+.btn-active{
+    border: 1px solid white;
+    background: linear-gradient(135deg, #9a0505 0%,#ffb000 100%);
+    color: white;
+}
 
-
+.panel{
+    width:330px !important;
+}
+.btn-img-text-curtir{
+    
 }
 </style>
 
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1 textos-soltos" >
             <div class="panel panel-success">
-                <div class="box-feed">
-                
-                    <div class="box-feed-post">
-                        <div class="box-image-feed">
-                            <img class="image-post" src="https://picsum.photos/276/270" alt="">
-                        </div>
 
-                        <div class="box-tags-feed">
-                            <a href="javascrpit:void(0)" class="tag">LojasAmericanas</a>
-                            <a href="javascrpit:void(0)" class="tag">QueroMuito</a>
-                            <a href="javascrpit:void(0)" class="tag">NatalChega</a>
-    
-                        </div>  
-
-                        <div class="box-info-feed"> 
-                            <div class="box-info-photo">
-                                <div class="box-photo">
-                                    <img src="images/icons/avatar.svg" alt="">
-                                </div>
-                                <div class="box-legenda">
-                                    <div><b>Thailan Higor</b></div>
-                                    <div>Testando apenas o box de legenda de uma foto</div>
-                                </div>
-                            </div>
-                            <div class="box-buttons-feed">
-                                <span class="btn-feed btn-gift">  <img src="images/icons/gift.svg" class="img-btn-feed" alt="">Curtir</span>
-                                <span class="btn-feed btn-comentar"><img src="images/icons/chat.svg" class="img-btn-feed" alt="">Comentar</span>
-                            </div>
-                        </div>
-                    </div> 
-
-                </div>
-                <div class="box-feed">
-                
+            @if($posts == [])
+            <div >
+                <p style="text-align: center;font-size:17px;">Seus amigos não postaram nada ainda!</p>
+                <p style="text-align: center;font-size:17px">Mas, experimente adicionar novos amigos, no icone de navegação do menu acima.</p>
+            </div>
+            @else
+                @foreach($posts as $post)
+                    <?php $curtiu = false ?>
+                    <div class="box-feed">
                         <div class="box-feed-post">
                             <div class="box-image-feed">
-                                <img class="image-post" src="https://picsum.photos/276/270?random" alt="">
+                                <img class="image-post" src="images/fotos/{{ $post['Foto'] }}" alt="">
                             </div>
-    
+
                             <div class="box-tags-feed">
-                                <a href="javascrpit:void(0)" class="tag">LojasAmericanas</a>
-                                <a href="javascrpit:void(0)" class="tag">QueroMuito</a>
-                                <a href="javascrpit:void(0)" class="tag">NatalChega</a>
-        
+                                @if($post != null)
+                                    @foreach ($post['tagsposts'] as $tag)
+                                        <a href="javascrpit:void(0)" class="tag"> {{$tag['NomeTag']}}</a>
+                                    @endforeach
+                                @endif
+                              
                             </div>  
-    
+
                             <div class="box-info-feed"> 
                                 <div class="box-info-photo">
                                     <div class="box-photo">
-                                        <img src="images/icons/avatar.svg" alt="">
+                                        <img src="images/fotoperfil/{{ $post['users']['FotoPerfil']}}" alt="">
                                     </div>
                                     <div class="box-legenda">
-                                        <div><b>Thailan Higor</b></div>
-                                        <div>Testando apenas o box de legenda de uma foto</div>
+                                        <div><b>{{ $post['users']['name']}}</b></div>
+                                        <div>{{ $post['Legenda'] }}</div>
                                     </div>
                                 </div>
+                                @if($post['likes']  != null)   
                                 <div class="box-buttons-feed">
-                                    <span class="btn-feed btn-gift">  <img src="images/icons/gift.svg" class="img-btn-feed" alt="">Curtir</span>
-                                    <span class="btn-feed btn-comentar"><img src="images/icons/chat.svg" class="img-btn-feed" alt="">Comentar</span>
+                                    @foreach ($post['likes'] as $like)
+                                    @if($like->PostId == $post['id'] && $like->User_id == Auth::user()->id )
+                                        <span class="btn-feed btn-gift btn-active" data-id="{{$post['id']}}"> 
+                                        <img src="images/icons/gift.svg" class="img-btn-feed"  alt="">
+                                            <span class="btn-img-text-curtir">Curtiu</span> </span>
+                                        <?php $curtiu = true ?>
+                                    @endif
+                                    @endforeach
+                                    
+                                    @if(!$curtiu)
+                                    <span class="btn-feed btn-gift" data-id="{{$post['id']}}"> 
+                                            <img src="images/icons/gift.svg" class="img-btn-feed"  alt="">
+                                            <span class="btn-img-text-curtir ">Curtir</span>
+                                    </span>
+                                    @endif
+                                    <span class="btn-feed btn-comentar" data-id="{{$post['id']}}" >
+                                        <img src="images/icons/chat.svg" class="img-btn-feed" alt="">
+                                        <span class="">Comentar</span>
+                                    </span>
                                 </div>
+                                @endif
+
                             </div>
                         </div> 
-    
-                    </div
+                    </div>
+                @endforeach
+            @endif
             </div>
         </div>
     </div>
@@ -176,10 +187,38 @@ a{
 
 
 <script>  
-    $('.panel-success').slick({
+  
+
+    $(document).ready(function() {
+        
+        $('.panel-success').slick({
         slidesToShow: 1,
-         arrows: true,
+         arrows: false,
+        });
     });
+
+    $(".btn-gift").click(function(){
+        var el = $(this);
+        var id_post = $(this).attr('data-id');
+        var id_user = {{ Auth::user()->id}};
+        var data = {
+            "id_post" : id_post,
+            "id_user" : id_user,
+        }
+        $.ajax({
+        url: '/feed/likePost',
+        dataType: 'html',
+        data: data,
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        method: 'post'
+        }).done(function(msg){
+            if(msg){
+                el.find('.btn-img-text-curtir').text("Curtiu");
+                el.addClass("btn-active");
+ 
+            }
+        });
+    })
  </script>
 @endsection
 

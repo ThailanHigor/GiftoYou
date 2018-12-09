@@ -1,5 +1,7 @@
 /* START LOJAS */
-
+body{
+    background: #F68600
+}
 .box-container{
     display: flex;
     justify-content: center;
@@ -17,23 +19,24 @@
     margin: 10px;
     flex-direction: column;
     box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
-    border-radius: 2px;
+    border-radius: 4px;
+    background: white;
 
 
 }
 
 .box-img{
     border-radius: 7px;
-    width: 87%;
-    height: 70%;
+    width: 71%;
+    height: 65%;
 
 
 }
 
 .box-title{
     font-size: 0.9em;
-height: 22%;
-padding: 6px;
+    text-align: center;
+    padding: 6px;
 }
 
 .check-lojas{
@@ -41,7 +44,8 @@ padding: 6px;
 }
 
 .box-active{
-    border: 2px solid #ffb000;
+    /* border: 2px solid #ffb000; */
+    border:2px solid #0091e2;
     border-radius: 5px;
 
 }
@@ -92,7 +96,6 @@ padding-right: 10px;
     border-radius: 43px;
     width: 16%;
     height: 55px;
-    background: white;
     align-self: flex-start;
 
 
@@ -100,7 +103,8 @@ padding-right: 10px;
 .button-avancar{
     height: 45px;
     color: white;
-    background: #ffb000;
+    /* background: #ffb000; */
+    background: #0091e2;
     border-bottom-left-radius: 12px;
     border-top-right-radius: 12px;
     font-size: 19px;
@@ -110,6 +114,7 @@ padding-right: 10px;
     margin-top: 4%;
     box-shadow: 0px 0px 7px -2px rgba(0,0,0,1);
     text-decoration: none;
+    cursor: pointer;
 
 }
 a {
@@ -129,6 +134,7 @@ cursor:pointer;
     border-top-left-radius: 12px;
     border-bottom-right-radius: 12px;
     font-size: 19px;
+    border: 1px solid white;
     width: 119px;
     text-align: center;
     line-height: 44px;
@@ -147,3 +153,7 @@ cursor:pointer;
 
 
 /* FIM START*/
+
+.textos-soltos{
+    color: white !important;
+}

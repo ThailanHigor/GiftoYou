@@ -15,10 +15,21 @@ class User extends Authenticatable
     {
        return $this->belongsToMany('App\Categorias');
     }
+    
 
     public function lojas()
     {
        return $this->belongsToMany('App\Lojas');
+    }
+
+    public function posts()
+    {
+      return $this->belongsTo(Posts::class, 'PostId','id');
+    }
+
+    public function user_friends()
+    {
+      return $this->belongsTo(UserFriends::class, 'UserFriend_id','id');
     }
     /**
      * The attributes that are mass assignable.
@@ -26,7 +37,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
 
     /**

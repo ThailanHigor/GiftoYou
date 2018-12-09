@@ -34,7 +34,7 @@
                 {!! Form::open(['route' => 'lojas.store', 'id' =>'lojasform']) !!}
                 <div class="box-container">
                 
-                    @foreach($lojas as $loja)
+                    @foreach($lojasFinal as $loja)
                             <div class="box-card" style="display:none">
                         
                                 <img src="/images/{{ $loja['Imagem_Thumb'] }}" alt="img" class="box-img">
