@@ -3,7 +3,7 @@
 <style>
     .box-card-categorias{
         height: 128px;
-        width: 26%;
+        width: 25%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -11,7 +11,6 @@
         flex-direction: column;
         box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
         border-radius: 2px;
-        background: white;
     }
 
     .box-container-categorias{
@@ -97,7 +96,7 @@
                 console.log(index);
                 setTimeout(function(){
                     $('.box-button').fadeIn();
-                },7500);
+                },2500);
                
             });    
         },700)

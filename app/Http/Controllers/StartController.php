@@ -6,10 +6,7 @@ use Illuminate\Http\Request;
 use App\Lojas;
 use App\Categorias;
 use App\UsersCategorias;
-use App\LojasCategorias;
 use App\UsersLojas;
-use App\User;
-
 
 class StartController extends Controller
 {
@@ -48,37 +45,9 @@ class StartController extends Controller
         $categoria_id = $categoria_random['Categorias_id'];
         $categoria = Categorias::where('id',$categoria_id)->first();
       }
-
-      $lojas_id =[];
-      $userCat = UsersCategorias::where("User_id","=",$id_user)->get();
-   
-
-      foreach($userCat as $categoria_id){
-          $lojas_id[] = $categoria_id["Categorias_id"];
-      }
-
-      $lojascat= LojasCategorias::all();
-      $lojas = [];
-      foreach($lojascat as $loja){
-        foreach ($lojas_id as $id) {
-          if($loja['Categoria_id'] == $id){
-            $lojas[] = $loja;
-          }
-        }
-      }
-
-
-      $lojasFinal = [];
-      $arraylojas=[];
-      foreach ($lojas as $loja) {
-        if(!in_array($loja["Loja_id"], $arraylojas)){
-          $lojasFinal[] = Lojas::where("id","=",$loja["Loja_id"])->first();
-          $arraylojas[] = $loja["Loja_id"];
-        }
-
-      };
-    
-      return view('start.startLojas')->with(compact('categoria', 'lojasFinal'));
+ 
+      $lojas = Lojas::all();
+      return view('start.startLojas')->with(compact('categoria', 'lojas'));
     }
 
     public function storeLojas(Request $request){
@@ -92,10 +61,6 @@ class StartController extends Controller
           $model->User_id = $id_user;
           $model->Lojas_id= $lojas_id;
           $model->save();
-
-          $usuario = User::find($id_user);
-          $usuario->ativo = true;
-          $usuario->save();
         }
       }
 
@@ -106,24 +71,4 @@ class StartController extends Controller
       return view('start.finish');
     }
 
-    public function addFoto(){
-      return view('start.perfilfoto');
-    }
-
-    public function saveAvatar(Request $request){
-
-      $avatar = $request->avatar;
-      $data = $request->data;
-
-      if($avatar != null && $data != null){
-        $id_user  = \Auth::user()->id;
-        $model = User::find($id_user);
-        $model->FotoPerfil = $avatar;
-        $model->DataAniversario = $data;
-        $model->save();
-        return redirect('/start');
-      }
-      return redirect('/foto-perfil');
-    
-    }
 }
