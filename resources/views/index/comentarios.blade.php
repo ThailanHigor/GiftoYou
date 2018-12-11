@@ -54,7 +54,7 @@
         p { word-break: break-all } --}}
         
  
-<div class="comment-container">
+<div class="message">
     <h3>Comentários<h3>
 @foreach ($posts['comentarios'] as $c)
 
@@ -62,6 +62,7 @@
             <div class="comment-text"><p>{{$c['Comentario']}}</p>
                
              </div>
+             <p>{{$posts['created_at']->format('d/m/Y')}}</p>
         </div>
     
 @endforeach

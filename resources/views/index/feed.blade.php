@@ -210,10 +210,7 @@ a{
 <script src="/js/slick.js" ></script>
 
 <style> 
-.fancybox-content{
-    width: 100% !important;
-    padding: 18px !important;
-}
+
 .comment-container{
     display: flex;
     flex-direction: column;
