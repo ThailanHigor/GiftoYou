@@ -16,6 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}" ></script>
     <script src="{{ asset('js/jquery.mask.js') }}" ></script>
+    <script src="{{ asset('js/jquery.fancybox.min.js') }}" ></script>
 
 
     <!-- Fonts -->
@@ -27,6 +28,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.fancybox.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -102,20 +104,20 @@ clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80
             @if(Auth()->check())
             <div class="container" style="width: 100%">
                 <a class="navbar-brand icone-menu icone-feed" href="{{ url('/feed') }}">
-                    <img class="icone-menu-img" src="images/icons/feed.svg" class=""  alt="">
+                    <img class="icone-menu-img" src="/images/icons/feed.svg" class=""  alt="">
                 </a>
                 <a class="navbar-brand  icone-menu icone-amigos" href="{{ url('/amigos') }}">
-                    <img class="icone-menu-img" src="images/icons/friends.svg" class=""  alt="">
+                    <img class="icone-menu-img" src="/images/icons/friends.svg" class=""  alt="">
                 </a>
                 <a class="navbar-brand icone-menu icone-camera" href="{{ url('/novo-post') }}">
-                    <img class="icone-menu-img" src="images/icons/camera.svg" class="" alt="">
+                    <img class="icone-menu-img" src="/images/icons/camera.svg" class="" alt="">
                 </a>
                 <a class="navbar-brand icone-menu icone-mapa" href="{{ url('/map') }}">
-                    <img class="icone-menu-img" src="images/icons/map.svg" class="" alt="">
+                    <img class="icone-menu-img" src="/images/icons/map.svg" class="" alt="">
                 </a>
                 <button class="navbar-toggler icone-user" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 @if(Auth()->check())
-                    <img src="images/fotoperfil/{{\Auth::user()->FotoPerfil}}" alt="" class="icon-perfil">
+                    <img src="/images/fotoperfil/{{\Auth::user()->FotoPerfil}}" alt="" class="icon-perfil">
                 @else
                  <span class="navbar-toggler-icon"></span>
                  @endif

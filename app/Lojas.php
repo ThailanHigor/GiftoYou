@@ -10,4 +10,10 @@ class Lojas extends Model
     {
         return $this->belongsToMany('App\User');
     }
+
+    public function usersLojas()
+    {
+      return $this->hasMany(Lojas::class, 'Id','Lojas_id');
+    }
+
 }

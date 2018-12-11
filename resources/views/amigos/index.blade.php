@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 <style>
+    html{ background: #F68600 !important}
     .button-meus-amigos{
         height: 45px;
     color: white;

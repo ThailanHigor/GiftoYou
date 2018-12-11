@@ -8,6 +8,8 @@ use App\TagsPosts;
 use App\Likes;
 use App\UserFriends;
 use App\User;
+use App\Comentarios;
+App\Http\Middleware\VerifyCsrfToken::class;
 
 class IndexController extends Controller
 {
@@ -39,7 +41,25 @@ class IndexController extends Controller
             
         } 
 
+      
         return view('index.feed')->with(compact('posts'));
+    }
+
+    public function Comentar(Request $request){
+        $id_post = $request->id_post;
+        $id_user = $request->id_user;
+        $comentario = $request->comment;
+
+        $model = new Comentarios();     
+        $model->PostId  = $id_post;
+        $model->User_id = $id_user;
+        $model->Comentario = $comentario;
+        $model->Excluido = false;
+        $model->Liberado = true;
+
+        $model->save();
+        
+        return redirect()->route('feed');
     }
 
     public function likePost(Request $request){
@@ -61,5 +81,16 @@ class IndexController extends Controller
         }
 
      
+    }
+
+    public function getPostsById(Request $request){
+        $id_post = $request->id_post;
+        $posts = Posts::Where("id","=",$id_post)->first();
+        if($posts == null){
+            return response()->json(false); 
+        }else{           
+            $view = view('index.comentarios', compact('posts'))->render();
+            return $view;
+        }
     }
 }

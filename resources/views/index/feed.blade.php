@@ -42,6 +42,7 @@
     height: 102px;
     box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.1);
     padding: 6px;
+    color: black;
 }
 
 .box-buttons-feed{
@@ -53,6 +54,7 @@
 }
 .btn-feed{
     width: 48%;
+    color: black;
 }
 .box-tags-feed{
     margin-top: 5px;
@@ -86,7 +88,7 @@ a{
     width: 48%;
     justify-content: center;
     display: flex;
-    border-radius: 41px;
+    border-radius: 6px;
 }
 .btn-feed:hover{
     border: 1px solid white;
@@ -106,6 +108,14 @@ a{
 .btn-img-text-curtir{
     
 }
+.ver-comentarios{
+    padding: 3px;
+    border-radius: 2px;
+    position: relative;
+    left: 597px;
+    top: -356px;
+    color: white;
+}
 </style>
 
 @section('content')
@@ -121,11 +131,21 @@ a{
             </div>
             @else
                 @foreach($posts as $post)
+               
                     <?php $curtiu = false ?>
                     <div class="box-feed">
                         <div class="box-feed-post">
                             <div class="box-image-feed">
-                                <img class="image-post" src="images/fotos/{{ $post['Foto'] }}" alt="">
+                                <a href="images/fotos/{{ $post['Foto'] }}" data-fancybox="images" data-caption="{{ $post['Legenda'] }}">
+                                    <img  class="image-post"  src="images/fotos/{{ $post['Foto'] }}" alt="" />
+                                </a>
+                                @if(!$post['comentarios']->isEmpty())
+                                <span  class="ver-comentarios" data-id="{{$post['id']}}"> 
+                                    <img  class="image-post"  src="images/icons/comments.svg" alt=""  style="    height: 35px;
+                                    width: 41px;"/>
+                                </span>
+                                @endif
+                                            
                             </div>
 
                             <div class="box-tags-feed">
@@ -140,6 +160,7 @@ a{
                             <div class="box-info-feed"> 
                                 <div class="box-info-photo">
                                     <div class="box-photo">
+                                      
                                         <img src="images/fotoperfil/{{ $post['users']['FotoPerfil']}}" alt="">
                                     </div>
                                     <div class="box-legenda">
@@ -164,9 +185,12 @@ a{
                                             <span class="btn-img-text-curtir ">Curtir</span>
                                     </span>
                                     @endif
-                                    <span class="btn-feed btn-comentar" data-id="{{$post['id']}}" >
+                                
+                                <span class="btn-feed btn-comentar {{$post['comentarios']->isEmpty() ? "" : "btn-active"}}" >
                                         <img src="images/icons/chat.svg" class="img-btn-feed" alt="">
-                                        <span class="">Comentar</span>
+                                        <span class="comment" data-id="{{$post['id']}}">
+                                            {{$post['comentarios']->isEmpty() ? "Comentar" : "Comentou"}}
+                                        </span>
                                     </span>
                                 </div>
                                 @endif
@@ -185,6 +209,32 @@ a{
 <link href="{{ asset('css/slick-theme.css') }}" rel="stylesheet">
 <script src="/js/slick.js" ></script>
 
+<style> 
+.fancybox-content{
+    width: 100% !important;
+    padding: 18px !important;
+}
+.comment-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.box-comentario{
+    border: 1px solid #0000009c;
+    height: 116px;
+    font-size: 18px;
+}
+.btn-enviar-comment{
+    font-size: 19px;
+    margin-top: 20px;
+    border: 1px solid white;
+    background: linear-gradient(135deg, #9a0505 0%,#ffb000 100%);
+    color: white;
+    height: 37px;
+    border-radius: 6px;
+}
+
+</style>
 
 <script>  
   
@@ -195,6 +245,7 @@ a{
         slidesToShow: 1,
          arrows: false,
         });
+
     });
 
     $(".btn-gift").click(function(){
@@ -219,6 +270,55 @@ a{
             }
         });
     })
+
+    
+$(".comment").on('click', function() {
+  var idpost = $(this).attr('data-id');
+  $.fancybox.open({
+    src : '<div class="message"><h3>Novo comentário</h3>'+
+            '<form method="post" action="/post-comentar">'+
+            '<div class="comment-container">'+
+                '<input type="hidden" name="_token" class="idpostcomment"  value ="{{ csrf_token() }}"/>'+
+                '<input type="hidden" name="id_post" class="idpostcomment"  value ="'+idpost+'"/>'+
+                '<input type="hidden" name="id_user" class="idpostcomment"  value ="{{Auth::user()->id}}"/>'+
+                
+                '<textarea class="box-comentario" name="comment"/></textarea>'+
+                '<button class="btn-enviar-comment btn-comentar btn-finalizar" >Finalizar</button> ' +
+            '</div>'+  
+            '</form>'+ 
+           '</div>',
+
+    type : 'html',
+    smallBtn : false
+  });
+  
+});
+
+$(".ver-comentarios").on('click', function() {
+        var idpost = $(this).attr('data-id');
+        var data = {
+            "id_post" : idpost,
+        }
+        $.ajax({
+        url: '/getPostsById',
+        dataType: 'html',
+        data: data,
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        method: 'get'
+        }).done(function(msg){
+            $.fancybox.open({
+            src : msg,
+
+            type : 'html',
+            smallBtn : false
+        }   );
+
+       
+        });
+  
+});
+
+
  </script>
 @endsection
 

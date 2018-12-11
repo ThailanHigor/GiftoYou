@@ -11,11 +11,7 @@
     font-size: 17px;
 
 }
-.btn-entrar{
-    width: 100%;    
-    font-family: 'Merienda One', cursive;
-    font-size: 17px;
-}
+
 </style>
 <div class="container">
     <div class="row justify-content-center">
@@ -68,7 +64,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4" style="    display: flex;
                             justify-content: space-between;"> 
-                                <button type="submit" class="btn btn-success btn-entrar">
+                                <button type="submit" class="btn btn-primary btn-entrar">
                                     Entrar
                                 </button>
                               
@@ -78,8 +74,7 @@
                         <div class="form-group row mb-0">
                             <p style="margin-top: 2rem;
                             width: 100%;
-                            text-align: center;">Não possui uma conta? Registre-se agora!</p>
-                            <a class="btn btn-primary btn-register" href="{{ route('register') }}">Registrar</a>
+                            text-align: center;">Não possui uma conta?<a class="" href="{{ route('register') }}"> Registre-se agora!</a></p>
                         </div>
                     </form>
                 </div>

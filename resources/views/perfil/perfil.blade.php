@@ -47,7 +47,7 @@ hr{
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                <img src="images/fotoperfil/{{$user['FotoPerfil']}}" alt="" style="    width: 195px;">
+                <img src="/images/fotoperfil/{{$user['FotoPerfil']}}" alt="" style="    width: 195px;">
                 
                 </div>
                 <div class="card-labels">
@@ -63,7 +63,7 @@ hr{
                     
                 </div>
                 <div class="card-labels">
-                    <a href="/meus-posts" class="btn btn-primary btn-entrar">Minhas Postagens</a>  
+                    <a href="/amigos" class="btn btn-primary btn-entrar">Voltar</a>  
 
                 </div>
             </div>

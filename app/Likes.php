@@ -8,6 +8,6 @@ class Likes extends Model
 {
     public function posts()
     {
-      return $this->belongsTo(Posts::class, 'PostId','id');
+      return $this->belongsTo(Posts::class, 'Postid','id');
     }
 }

@@ -42,3 +42,9 @@ Route::get('/map', 'MapController@index')->name('maps')->middleware('auth');
 Route::post('/save-avatar', 'StartController@saveAvatar')->name('selectavatar');
 
 Route::get('/meu-perfil', 'PerfilController@meuPerfil')->name('meu-perfil')->middleware('auth');
+Route::get('/meus-posts', 'PerfilController@meusPosts')->name('meus-posts')->middleware('auth');
+Route::get('/perfil/{id}', 'PerfilController@Perfil')->name('perfil')->middleware('auth');
+
+Route::post('/post-comentar', 'IndexController@Comentar')->name('comentar')->middleware("auth");
+
+Route::get('/getPostsById', 'IndexController@getPostsById')->name('getPostsById')->middleware('auth');

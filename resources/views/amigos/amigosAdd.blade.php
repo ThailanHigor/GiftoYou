@@ -1,5 +1,8 @@
 <style> 
-
+        html{ background: #F68600 !important}
+        body{
+           background: #F68600 !important
+        }
         .nome-amigo{
             width: 50%;
             display: flex;
